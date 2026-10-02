@@ -1,0 +1,1 @@
+export default function Home(){return <main><h1>MGAS</h1><p>Memorial Giving & Appreciation System</p><p>Application foundation initialized. Donation entry and authentication are not enabled yet.</p></main>}

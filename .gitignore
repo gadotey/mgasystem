@@ -17,3 +17,5 @@ node_modules/
 # Local deployment backups
 *.backup
 *.original
+# Next.js generated types
+next-env.d.ts

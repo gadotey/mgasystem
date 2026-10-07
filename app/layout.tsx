@@ -1,2 +1,20 @@
-import type { ReactNode } from 'react';
-export default function RootLayout({children}:{children:ReactNode}) { return <html lang="en"><body style={{fontFamily:'system-ui',maxWidth:900,margin:'3rem auto',padding:'0 1rem'}}>{children}</body></html> }
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "MGAS",
+  description: "Memorial Giving & Appreciation System",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}

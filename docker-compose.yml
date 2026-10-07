@@ -1,14 +1,58 @@
 services:
+
   db:
     image: postgres:16-alpine
+    container_name: mgas-db
     restart: unless-stopped
+
     environment:
       POSTGRES_DB: mgas
       POSTGRES_USER: mgas
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-    ports:
-      - "127.0.0.1:5432:5432"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Database password required}
+
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mgas_pgdata:/var/lib/postgresql/data
+
+    networks:
+      - mgas-internal
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mgas -d mgas"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: mgas-app:local
+    container_name: mgas-app
+    restart: unless-stopped
+
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://mgas:${POSTGRES_PASSWORD}@db:5432/mgas?schema=public
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - mgas-internal
+      - homelab-proxy
+
+    expose:
+      - "3000"
+
 volumes:
-  pgdata:
+  mgas_pgdata:
+
+networks:
+  mgas-internal:
+    internal: true
+
+  homelab-proxy:
+    external: true
+    name: homelab-proxy_default

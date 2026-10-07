@@ -3,3 +3,17 @@ node_modules
 .env
 .env.local
 *.log
+
+# Local environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Dependencies and build output
+node_modules/
+.next/
+*.log
+
+# Local deployment backups
+*.backup
+*.original

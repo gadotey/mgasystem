@@ -1,66 +1,107 @@
-generator client { provider = "prisma-client-js" }
-datasource db { provider = "postgresql" url = env("DATABASE_URL") }
-enum Role { SUPER_ADMIN FAMILY_ADMIN COLLECTION_OFFICER }
-enum DonationType { MONEY IN_KIND }
-enum DonationStatus { PENDING CONFIRMED VOIDED }
-enum PaymentMethod { CASH ZELLE CASH_APP VENMO MOBILE_MONEY BANK_TRANSFER CARD OTHER IN_KIND }
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  FAMILY_ADMIN
+  COLLECTION_OFFICER
+}
+
+enum DonationType {
+  MONEY
+  IN_KIND
+}
+
+enum DonationStatus {
+  PENDING
+  CONFIRMED
+  VOIDED
+}
+
+enum PaymentMethod {
+  CASH
+  ZELLE
+  CASH_APP
+  VENMO
+  MOBILE_MONEY
+  BANK_TRANSFER
+  CARD
+  OTHER
+  IN_KIND
+}
+
 model Family {
- id String @id @default(cuid())
- name String
- createdAt DateTime @default(now())
- events Event[]
- memberships Membership[]
+  id          String       @id @default(cuid())
+  name        String
+  createdAt   DateTime     @default(now())
+  events      Event[]
+  memberships Membership[]
 }
+
 model User {
- id String @id @default(cuid())
- email String @unique
- name String
- createdAt DateTime @default(now())
- memberships Membership[]
- recordedDonations Donation[] @relation("Recorder")
+  id                String       @id @default(cuid())
+  email             String       @unique
+  name              String
+  createdAt         DateTime     @default(now())
+  memberships       Membership[]
+  recordedDonations Donation[]   @relation("Recorder")
 }
+
 model Membership {
- id String @id @default(cuid())
- userId String
- familyId String
- role Role
- user User @relation(fields:[userId], references:[id])
- family Family @relation(fields:[familyId], references:[id])
- @@unique([userId,familyId])
+  id       String @id @default(cuid())
+  userId   String
+  familyId String
+  role     Role
+
+  user   User   @relation(fields: [userId], references: [id])
+  family Family @relation(fields: [familyId], references: [id])
+
+  @@unique([userId, familyId])
 }
+
 model Event {
- id String @id @default(cuid())
- familyId String
- name String
- slug String @unique
- startsAt DateTime
- endsAt DateTime?
- country String
- currency String
- family Family @relation(fields:[familyId],references:[id])
- donations Donation[]
+  id        String    @id @default(cuid())
+  familyId  String
+  name      String
+  slug      String    @unique
+  startsAt  DateTime
+  endsAt    DateTime?
+  country   String
+  currency  String
+
+  family    Family     @relation(fields: [familyId], references: [id])
+  donations Donation[]
 }
+
 model Donation {
- id String @id @default(cuid())
- receiptNumber String @unique
- eventId String
- recorderId String?
- donorFirstName String?
- donorLastName String?
- donorPhone String?
- donorEmail String?
- anonymous Boolean @default(false)
- type DonationType
- method PaymentMethod
- status DonationStatus @default(PENDING)
- amount Decimal? @db.Decimal(14,2)
- currency String?
- giftDescription String?
- providerReference String?
- clientSubmissionId String @unique
- createdAt DateTime @default(now())
- confirmedAt DateTime?
- event Event @relation(fields:[eventId],references:[id])
- recorder User? @relation("Recorder",fields:[recorderId],references:[id])
- @@index([eventId,createdAt])
+  id                 String         @id @default(cuid())
+  receiptNumber      String         @unique
+  eventId            String
+  recorderId         String?
+  donorFirstName     String?
+  donorLastName      String?
+  donorPhone         String?
+  donorEmail         String?
+  anonymous          Boolean        @default(false)
+  type               DonationType
+  method             PaymentMethod
+  status             DonationStatus @default(PENDING)
+  amount             Decimal?       @db.Decimal(14, 2)
+  currency           String?
+  giftDescription    String?
+  providerReference  String?
+  clientSubmissionId String         @unique
+  createdAt          DateTime       @default(now())
+  confirmedAt        DateTime?
+
+  event    Event @relation(fields: [eventId], references: [id])
+  recorder User? @relation("Recorder", fields: [recorderId], references: [id])
+
+  @@index([eventId, createdAt])
 }

@@ -1,3 +1,9 @@
+
+/* =========================================================
+   MGAS — Memorial Giving & Appreciation System
+   Global Styles | Dashboard Phase 2B
+   ========================================================= */
+
 :root {
   --bg: #f5f7fa;
   --surface: #ffffff;
@@ -11,6 +17,10 @@
   --success: #287a52;
   --warning: #b7791f;
 }
+
+/* =========================================================
+   Reset and base
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -32,15 +42,31 @@ textarea {
   font: inherit;
 }
 
+a {
+  cursor: pointer;
+}
+
+/* =========================================================
+   Main application layout
+   ========================================================= */
+
 .app {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 245px 1fr;
+  grid-template-columns: 245px minmax(0, 1fr);
 }
+
+.content {
+  min-width: 0;
+}
+
+/* =========================================================
+   Sidebar
+   ========================================================= */
 
 .sidebar {
   background: var(--primary-dark);
-  color: white;
+  color: #ffffff;
   padding: 28px 20px;
 }
 
@@ -57,6 +83,7 @@ textarea {
 .brand p {
   margin: 5px 0 0;
   font-size: 12px;
+  line-height: 1.4;
   color: #cbd5e1;
 }
 
@@ -67,17 +94,19 @@ textarea {
 }
 
 .nav-item {
+  display: block;
   padding: 12px 14px;
   border-radius: 8px;
   color: #dbe3ef;
   text-decoration: none;
   font-size: 14px;
+  transition: background 0.2s ease;
 }
 
 .nav-item:hover,
 .nav-item.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 
 .nav-item.primary {
@@ -87,18 +116,23 @@ textarea {
   font-weight: 700;
 }
 
-.content {
-  min-width: 0;
+.nav-item.primary:hover {
+  background: #c9a35f;
 }
 
+/* =========================================================
+   Top navigation
+   ========================================================= */
+
 .topbar {
-  height: 76px;
-  background: white;
+  min-height: 76px;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 0 34px;
+  padding: 16px 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .event-name {
@@ -110,9 +144,14 @@ textarea {
   font-size: 14px;
 }
 
+/* =========================================================
+   Dashboard main content
+   ========================================================= */
+
 .main {
   padding: 34px;
   max-width: 1500px;
+  margin: 0 auto;
 }
 
 .heading-row {
@@ -131,9 +170,11 @@ textarea {
 .heading-row p {
   color: var(--muted);
   margin: 7px 0 0;
+  line-height: 1.5;
 }
 
 .demo-badge {
+  flex-shrink: 0;
   background: #fff7e6;
   border: 1px solid #f0d18c;
   color: #8a6116;
@@ -142,6 +183,102 @@ textarea {
   font-size: 12px;
   font-weight: 700;
 }
+
+/* =========================================================
+   Memorial banner
+   ========================================================= */
+
+.memorial-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 26px;
+  margin-bottom: 26px;
+  border: 1px solid #e6d9c5;
+  border-radius: 16px;
+  background: linear-gradient(
+    115deg,
+    #f2e6d5 0%,
+    #faf5ed 55%,
+    #fffdf9 100%
+  );
+  box-shadow: 0 4px 16px rgba(67, 52, 30, 0.05);
+}
+
+.memorial-photo-placeholder {
+  flex-shrink: 0;
+  width: 110px;
+  height: 125px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e3d3bb, #c8b394);
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(50, 40, 30, 0.12);
+  color: #68553d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.memorial-placeholder-symbol {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.memorial-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.memorial-eyebrow {
+  margin: 0 0 10px;
+  color: #97733d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.memorial-details h2 {
+  margin: 0 0 8px;
+  color: #342c29;
+  font-size: clamp(20px, 2.3vw, 29px);
+  line-height: 1.25;
+}
+
+.memorial-tribute {
+  margin: 0 0 12px;
+  color: #675c50;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.memorial-event {
+  margin: 0;
+  color: #746c62;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.memorial-event-status {
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #e4d4bd;
+  color: #82623c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   Financial summary cards
+   ========================================================= */
 
 .cards {
   display: grid;
@@ -154,6 +291,7 @@ textarea {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 21px;
+  min-width: 0;
 }
 
 .card-label {
@@ -165,13 +303,19 @@ textarea {
 .card-value {
   font-size: 27px;
   font-weight: 750;
+  overflow-wrap: anywhere;
 }
 
 .card-note {
   color: var(--muted);
   font-size: 12px;
   margin-top: 8px;
+  line-height: 1.5;
 }
+
+/* =========================================================
+   Recent donations section
+   ========================================================= */
 
 .section {
   margin-top: 25px;
@@ -187,6 +331,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
 
 .section-header h3 {
@@ -200,6 +345,14 @@ textarea {
   text-decoration: none;
   font-weight: 700;
 }
+
+.section-header a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   Donation table
+   ========================================================= */
 
 table {
   width: 100%;
@@ -222,6 +375,14 @@ th {
   letter-spacing: 0.03em;
 }
 
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #fafbfc;
+}
+
 .amount {
   font-weight: 700;
 }
@@ -236,11 +397,47 @@ th {
   font-weight: 700;
 }
 
-@media (max-width: 1000px) {
+/* =========================================================
+   Tablet layout
+   ========================================================= */
+
+@media (max-width: 1200px) {
   .cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 210px minmax(0, 1fr);
+  }
+
+  .sidebar {
+    padding: 24px 14px;
+  }
+
+  .main {
+    padding: 24px;
+  }
+
+  .topbar {
+    padding: 16px 24px;
+  }
+
+  .memorial-banner {
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .memorial-photo-placeholder {
+    width: 90px;
+    height: 110px;
+  }
+}
+
+/* =========================================================
+   Mobile layout
+   ========================================================= */
 
 @media (max-width: 720px) {
   .app {
@@ -257,15 +454,50 @@ th {
 
   .nav {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .nav-item.primary {
+    margin: 0;
   }
 
   .topbar {
-    padding: 0 18px;
+    min-height: 65px;
+    padding: 14px 18px;
   }
 
   .main {
     padding: 20px;
+  }
+
+  .heading-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .heading-row h2 {
+    font-size: 23px;
+  }
+
+  .memorial-banner {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .memorial-photo-placeholder {
+    width: 85px;
+    height: 100px;
+  }
+
+  .memorial-details {
+    flex: 1 1 180px;
+  }
+
+  .memorial-event-status {
+    margin-left: 0;
   }
 
   .cards {
@@ -274,5 +506,13 @@ th {
 
   .section {
     overflow-x: auto;
+  }
+
+  table {
+    min-width: 620px;
+  }
+
+  .section-header {
+    padding: 16px;
   }
 }

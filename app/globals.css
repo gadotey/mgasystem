@@ -515,4 +515,152 @@ tbody tr:hover {
   .section-header {
     padding: 16px;
   }
+
+/* MGAS Donation Form */
+
+.donation-form {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form-section {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.form-section h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.form-section > p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text);
+  font: inherit;
+  font-weight: 400;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.checkbox-row input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--primary);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.verification-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  background: #fff8e8;
+  border: 1px solid #ead5a7;
+  border-radius: 10px;
+  color: #76571f;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 30px;
+}
+
+.submit-button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: var(--primary-dark);
+}
+
+@media (max-width: 720px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+}
+
+
+/* Active sidebar navigation */
+
+.nav-item.primary:not(.active) {
+  background: #b7904b;
+  color: #ffffff;
+}
+
+.nav-item.active {
+  background: #ffffff;
+  color: #1b2b4d;
+  font-weight: 700;
+  border-left: 4px solid #b7904b;
+}
+
+.nav-item.primary.active {
+  background: #ffffff;
+  color: #1b2b4d;
+  border-left: 4px solid #b7904b;
+}
+
+
 }
